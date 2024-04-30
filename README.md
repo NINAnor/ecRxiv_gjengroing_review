@@ -14,7 +14,10 @@ As a minimum requirement, the documentation must be renderable as an html, and y
 
 ### Workflow
 
-The submission and publication of indicator documentation is described in the numbered workflow below.
+[![Tutorial video](https://img.youtube.com/vi/vaFVaC7A48o/0.jpg)](https://www.youtube.com/watch?v=vaFVaC7A48o)
+
+
+The submission and publication of indicator documentation is also described in the numbered workflow below.
 
 1.  Fork the main branch of this repository (repo)
 2.  Fill inn the appropriate template files and rename the files according to our [naming convention](#naming-convention)
