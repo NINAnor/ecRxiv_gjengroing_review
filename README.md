@@ -1,4 +1,4 @@
-# ECindicators
+# ecRxiv
 
 ### - a publishing platform for Ecosystem condition indicators.
 
@@ -6,7 +6,7 @@
 
 Ecosystem condition indicators are used in ecosystem condition assessments and accounts to monitor the quality and integrity of nature. These assessments and accounts can be important policy instruments that guide nature governance. When presented in reports aimed for managers and policy makers, indicators are often described just enough for them to be interpretable. However, indicator calculations/designs are often quite technical and includes many steps that cannot be described fully in a rapport that may include several indicators and indices. There is a need to document these workflows in order to validate and review their soundness and relevance for describing ecosystem condition. This documentation will also be a benefit to the ecosystem condition indicator community of practice because it makes it easier to learn from each other and develop the field quicker.
 
-## How to use ECindicators
+## How to use ecRxiv
 
 On this site (this GitHub repository) you can submit technical documentation and ecological justification for your ecosystem condition indicator(s) and have it published on an online web application in a standardised format along side other indicators from anywhere in the world.
 
@@ -27,7 +27,7 @@ The submission and publication of indicator documentation is also described in t
 6.  The publicly available documentation is now subject to voluntary review, for which there are separate guidelines.
 7.  The PR authors can revise their documentation as many time as needed, and in response to review by peers. Major revisions may result in the creation of a new version number for the original indicator.
 
-### Naming convention {#naming-convention}
+### Naming convention
 
 All indicators are given a unique code:
 
