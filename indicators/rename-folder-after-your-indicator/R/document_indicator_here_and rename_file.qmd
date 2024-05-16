@@ -56,6 +56,20 @@ url <- meta |>
   filter(Variable == "url") |>
   pull(Value)
 
+meta <- meta |>
+  mutate(Variable = case_match(Variable,
+    "indicatorID" ~ "Indicator ID" ,
+    "indicatorName" ~ "Indicator Name",
+    "country" ~ "Country",
+    "continent" ~ "Continent",
+    "ECT" ~ "Ecosystem Condition Typology Class",
+    "yearAdded" ~ "Year added",
+    "yearLastUpdate" ~ "Last update",
+    .default = Variable
+   )
+  ) |>
+  filter(Variable != "authors")
+
 ```
 
 <!--# The following parts are autogenertaed. Do not edit. -->
@@ -80,14 +94,14 @@ status(st)
 :::
 :::
 
-```{r tbl}
+```{r tbl-meta}
+#| tbl-cap: 'Indicator metadata'
 #| echo: false
 #| warning: false
 
 meta |>
   select(Variable, Value) |>
-  kbl(col.names = NULL) |>
-  kable_classic()
+  kbl(col.names = NULL) 
 
 ```
 
