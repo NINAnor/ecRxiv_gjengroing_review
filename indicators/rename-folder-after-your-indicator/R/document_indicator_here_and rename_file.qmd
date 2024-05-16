@@ -1,15 +1,18 @@
 ---
-title: "Ditches in mires"
+title: "Enter indicator name here"
 format: 
   html:
     embed-resources: true
 author:
-  - name: Anders Kolstad              # Enter name
-    email: anders.kolstad@nina.no  # Enter email
+  - name: John Doe              # Enter name
+    email: john.doe@example.no  # Enter email
     affiliations:
       - id: myID
-        name: Norwegian Institute for Nature Research
-date: May 14, 2024 # Enter date 
+        name: A Fictive Institute for Nature Research # Enter affiliations
+  - name: Jane Doe              #  Enter subsequent authors like this, or remove if not relevant
+    affiliations:
+      - ref: myID               # To reuse affiliations referecen the id like this
+date: April 10, 2024 # Enter date 
 callout-icon: false
 ---
 
@@ -22,9 +25,7 @@ callout-icon: false
 library(knitr)
 library(tidyverse)
 library(kableExtra)
-library(sf)
-library(tmap)
-library(ggmagnify)
+library(here)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -93,11 +94,20 @@ status(st)
 :::
 :::
 
+```{r tbl-meta}
+#| tbl-cap: 'Indicator metadata'
+#| echo: false
+#| warning: false
 
+meta |>
+  select(Variable, Value) |>
+  kbl(col.names = NULL) 
 
-# Ditches in mires
+```
 
-_Norwegian name:_ Grøfter i myr
+# Indicator name
+
+<!--# Replace 'indicator name' with your the actual indicator name -->
 
 <br />
 
@@ -112,8 +122,6 @@ _Norwegian name:_ Grøfter i myr
 ## 1. Introduction
 
 <!--# Describe the indicator in general terms. It is a good idea to include a bullet point list of the spesific steps in the workflow -->
-
-1. **Import data**. A vectorised version of the orignal raster is stored under `data/`.
 
 ## 2. About the underlying data
 
@@ -181,46 +189,9 @@ _Norwegian name:_ Grøfter i myr
 
 <!--# Describe the unique datasets seperately under seperate headers (Dataset A, Dataset B, etc.-->
 
-### 7.1 Ditches in Levanger
+### 7.1 Dataset A
 
 <!--# Describe the main dataset, typicaly the one containing the variable of (most) interest. Change the header from Dataset A to the name of the actuall dataset. -->
-The dataset is created by Vegar Bakkestuen and comes from using LiDAR data (and other input data?) and a deep learning algorithm to detect ditches.
-The model is trained on a map of delineated, real ditches in mires (bogs and fens).
-The model produces a probability of occurrence for ditches in 1x1 meter grid cells.
-I will use a polygon set derived from this raster using a threshold value for probability of ??.
-The extent of the data is roughly 10x10 km in Levanger municiapality, Central Norway.
-This area was selected as a pilot region for testing the production of this kind of preditcive map of mire ditches.
-
-
-```{r readDitchata}
-ditches <- sf::read_sf("../data/LevangerGroftPolygon.shp")
-!any(st_is_valid(ditches))
-```
-
-I will use UTM32 as my coordinate reference system (CRS):
-```{r myCRS}
-myCRS <- 25832
-```
-
-```{r firstMap}
-#| fig-cap: 'Map of ditches in Levanger. Ditches were automatically identified, mainly from LiDAR, via a deep learning. Ditches have been rutinely dug mires (fens or bogs) in order to lower the water table. Today the areas could be something else, like forest or agriculture.'
-#| code-fold: true
-#| code-summary: 'Code to produce map'
-#| cache: true
-  
-ditches |>
-  ggplot()+
-  geom_sf(color = "orange") +
-  theme_bw() +
-  coord_sf(
-    datum = st_crs(myCRS)) +
-  ggmagnify::geom_magnify(
-    from = c(620000, 621000, 7062000, 7063000), 
-    to =   c(623000, 628000, 7060000, 7066000),
-    aspect = "fixed",
-    shadow =T,
-    corners = 0) 
-```
 
 ### 7.2. Dataset B
 
