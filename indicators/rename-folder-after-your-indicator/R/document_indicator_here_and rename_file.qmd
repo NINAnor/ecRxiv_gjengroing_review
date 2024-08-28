@@ -49,7 +49,7 @@ auth <- meta |>
 year <- meta |>
   filter(Variable == "yearAdded") |>
   pull(Value)
-name <- year <- meta |>
+name <- meta |>
   filter(Variable == "indicatorName") |>
   pull(Value)
 url <- meta |>
@@ -84,7 +84,7 @@ status(st)
 ::: {.callout-note style="background: cornsilk;"}
 ## Recomended citation
 
-`r paste(auth, year, name, "v.", version, "ecRxiv", url, sep=" ")`
+`r paste(auth, year, ".", name, "v.", version, "ecRxiv", url, sep=" ")`
 :::
 
 ::: {.callout-note style="background: khaki;"}
