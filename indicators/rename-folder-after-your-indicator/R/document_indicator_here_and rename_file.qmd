@@ -94,6 +94,11 @@ status(st)
 :::
 :::
 
+```{=html}
+<details>
+<summary>Show metadata</summary>
+```
+
 ```{r tbl-meta}
 #| tbl-cap: 'Indicator metadata'
 #| echo: false
@@ -105,6 +110,9 @@ meta |>
 
 ```
 
+```{=html}
+</details>
+```
 # Indicator name
 
 <!--# Replace 'indicator name' with your the actual indicator name -->
