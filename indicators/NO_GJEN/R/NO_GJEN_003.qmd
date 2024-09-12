@@ -432,7 +432,7 @@ if(runFromScratch){
 nin %>%
    dplyr::select(id, hovedøkosystem, tilstand) %>%
    st_transform("EPSG:4326") %>%
-   st_write('../data/nin_cleaned.shp', append=FALSE)
+   st_write('/data/P-Prosjekter2/412421_okologisk_tilstand_2024/NiN/nin_cleaned.shp', append=FALSE)
 }
 ```
 
