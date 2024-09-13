@@ -18,8 +18,7 @@ As a minimum requirement, the documentation must be renderable as an html, and y
 
 ### Workflow
 
-[![Tutorial video](https://img.youtube.com/vi/vaFVaC7A48o/0.jpg)](https://www.youtube.com/watch?v=vaFVaC7A48o)
-
+[![Tutorial video](https://img.youtube.com/vi/wLYnORKZ1ZQ/0.jpg)](https://www.youtube.com/watch?v=wLYnORKZ1ZQ)
 
 The submission and publication of indicator documentation is also described in the numbered workflow below.
 
