@@ -37,6 +37,7 @@ Then initiate sparse checkout based on the root folder:
 `git sparse-checkout init --cone`
 
 Checkout root folder (downloads blobs (files), some of which you'll need):
+
 `git checkout <BRANCH NAME>`
 
 BRANCH NAME is likely to be `main` in the above. Now, specify additional folders to download:
