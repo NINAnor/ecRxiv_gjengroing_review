@@ -43,9 +43,10 @@ process_and_bind_dfs <- function(df_list) {
       fill(everything(), .direction = "downup")  |> 
       ungroup() |> 
       # Select only the columns you care about
-      select(HTML_File, indicatorName, country, continent, ECT, yearAdded, yearLastUpdate)  |> 
+      select(HTML_File, indicatorName, country, continent, ECT, yearAdded, yearLastUpdate, indicatorID)  |> 
       # Remove duplicates if any
-      distinct()
+      distinct() |> 
+      rename(ID=indicatorID)
     
     wide_df
   })
