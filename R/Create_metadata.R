@@ -29,25 +29,30 @@ create_metadata_table <- function(path) {
 #' @return combined metadata dataframe
 #' @export
 
-  process_and_bind_dfs <- function(df_list) {
-    # Transform each dataframe
-    df_wide_list <- map(df_list, ~{
-      # Extract the ID column name (assumes the name of the second column as the ID)
-      id_name <- names(.x)[2]
-      # Extract the URL from any row (assuming it's the same across all rows of a single dataframe)
-      url <- unique(.x$HTML_File)
-      
-      # Pivot the dataframe to wide format, using names from 'indicatorID'
-      wide_df <- pivot_wider(.x, names_from = indicatorID, values_from = !!sym(id_name), values_fill = NA)
-      
-      # Add the URL and ID as separate columns
-      wide_df %>%
-        mutate(URL = url, ID = id_name)
-    })
+process_and_bind_dfs <- function(df_list) {
+  # Process each dataframe in the list
+  df_wide_list <- map(df_list, ~{
+    # Pivot the dataframe so that Variable values become column names
+    wide_df <- .x |> 
+      # Filter only relevant variables
+      filter(Variable %in% c("indicatorID", "indicatorName", "country", "continent", "ECT", "yearAdded", "yearLastUpdate")) |> 
+      select(Variable, Value, HTML_File) |> 
+      pivot_wider(names_from = Variable, values_from = Value, values_fn = list(Value = ~ first(na.omit(.)))) |> 
+      # Group by HTML_File and fill missing values within each group
+      group_by(HTML_File) %>%
+      fill(everything(), .direction = "downup")  |> 
+      ungroup() |> 
+      # Select only the columns you care about
+      select(HTML_File, indicatorName, country, continent, ECT, yearAdded, yearLastUpdate)  |> 
+      # Remove duplicates if any
+      distinct()
     
-    # Combine all transformed dataframes into one
-    bind_rows(df_wide_list)
-  }
+    wide_df
+  })
+  
+  # Combine all transformed dataframes into one
+  bind_rows(df_wide_list)
+}
 
 #' create the app data
 #'
