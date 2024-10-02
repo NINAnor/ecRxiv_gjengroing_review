@@ -103,7 +103,6 @@ status(st)
 <details>
 <summary>Show metadata</summary>
 ```
-
 ```{r tbl-meta}
 #| tbl-cap: 'Indicator metadata'
 #| echo: false
@@ -115,9 +114,7 @@ meta |>
 
 ```
 
-```{=html}
 </details>
-```
 
 # Gjengroing / Woody Enchroachment
 
@@ -139,7 +136,7 @@ We rely on the following datasets:
 
 -   [NiN nature type polygons](https://kartkatalog.miljodirektoratet.no/Dataset/Details/2031) are used to identify reference areas with good ecological condition.
 -   [Nasjonalt grunnkart](https://nibio.brage.unit.no/nibio-xmlui/handle/11250/3120510) is used as the population sample for wetland. The population sample are the areas used to determine ecological condition relative to the reference areas. We also use the grunnkart-data to identify forest for defining the lower limit of ecological condition index (i.e. poor condition).
--   GRUK dataset is used population sample for natural open areas. as The dataset is based on a method for area-representative monitoring of dry calcareous grassland (åpent grunnlendt kalkmark).
+-   GRUK dataset is used as population sample for natural open areas. The dataset is based on a method for area-representative monitoring of dry calcareous grassland (åpent grunnlendt kalkmark). <!--# Ref? -->
 -   [ASO dataset](https://www.miljodirektoratet.no/ansvarsomrader/overvaking-arealplanlegging/miljoovervaking/overvakingsprogrammer/natur-pa-land/semi-naturlig-eng/) is used as population sample for semi-natural areas. This dataset is based on a method for area-representative monitoring of semi-natural grasslands.
 -   LiDAR-derived digital elevation model from Kartverket's [høydedata](https://hoydedata.no/LaserInnsyn/). This includes both a terrain (DTM) and surface model (DSM). We calculate the canopy height model (CHM=DSM-DTM) to get the height of objects above the ground. From this we remove buildings, and what remains is vegetation - mostly trees but also some bushes or smaller woody plants.
 -   [FKB building footprints](https://kartkatalog.geonorge.no/metadata/fkb-bygning/8b4304ea-4fb0-479c-a24d-fa225e2c6e97) are used to isolate vegetation in the LiDAR height data.
@@ -150,17 +147,17 @@ We rely on the following datasets:
 
 ### 2.1 Spatial and temporal resolution
 
-The index will cover the mainland of Norway. The analysis will be stratified by (1) våtmark (wetland), (2) åpen (natural open), and (3) semi-naturlig (semi-natural) ecosystems below the forestline. The LiDAR data cover a range of years and therefore the indicator represents conditions for circa 2010 to 2021.
+The indicator will cover the mainland of Norway. The analysis will be stratified by (1) våtmark (wetland), (2) åpen (natural open), and (3) semi-naturlig (semi-natural) ecosystems below the forestline. The LiDAR data cover a range of years and therefore the indicator represents conditions for circa 2010 to 2021.
 
 Temporal coverage: Circa 2010 to 2023. This is a single snapshot and not a change analysis. In the future, when LiDAR data has been repeated across the country, it may be possible to do a change assessment.
 
 ### 2.2 Original units
 
-The original units for ecological condition are meters. This is the height of the vegetation within reference, polygon and forest areas.
+The original units for the canopy model is meters. This is the height of the vegetation within reference, polygon and forest areas.
 
 ### 2.3 Additional comments about the dataset
 
-<!--# Text here -->
+There is no plan yet to update the LiDAR dataset over the whole of Norway. Therefore there is a related enchorchemnt indicator being developed that uses satellite or aerial images that are updated more frequently.
 
 ## 3. Indicator properties
 
@@ -168,19 +165,17 @@ The original units for ecological condition are meters. This is the height of th
 
 <!--# Describe the rationale for assigning the indicator to the ECT class -->
 
-ECT: Structural state characteristic
+ECT: Structural state characteristic (B2)
 
-Ecosystem: Våtmark, naturlig åpne and semi-natural ecosystems.
-
-Egenskap: Funksjonell sammensetning innen trofiske nivåer.
+Ecosystem: Våtmark (wetlands, mainly mire)), naturlig åpne (naturlaly open) and semi-natural ecosystems. The indicator is developed seperately for each of these three.
 
 ### 3.2. Ecosystem condition characteristic
 
-<!--# Describe the ecosystem condition characteristic represneted in the indicator. See 10.3897/oneeco.6.e58218 for information on what these characteristics might be. -->
+In good condition, the three target ecosystems are characterised as being open, with little trees.
 
 ### 3.3. Other standards
 
-<!--# Add text about other spesific standards, e.g. natinoal standards, and how the indicator relates to these -->
+The indicator is related to the *Funksjonell sammensetning innen trofiske nivåer* in the Norwegian standard fro ecosystem condition assessments.
 
 ### 3.4. Collinearities with other indicators
 
