@@ -3,16 +3,17 @@ title: "Woody enchroachment - approach based on LiDAR"
 format: 
   html:
     embed-resources: true
+    code-fold: true
 author:
-  - name: Ida M. Mienna              # Enter name
-    email: ida.mienna@nina.no  # Enter email
+  - name: Ida M. Mienna
+    email: ida.mienna@nina.no
     affiliations:
       - id: myID
-        name: The Norwegian Institute for Nature Research (NINA) # Enter affiliations
-  - name: Zander Venter              #  Enter subsequent authors like this, or remove if not relevant
+        name: The Norwegian Institute for Nature Research (NINA) 
+  - name: Zander Venter 
     affiliations:
-      - ref: myID               # To reuse affiliations referecen the id like this
-date: September 30, 2024 # Enter date 
+      - ref: myID    
+date: September 30, 2024 
 callout-icon: false
 ---
 
@@ -38,8 +39,6 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 ```{r source}
 #| echo: false
 source(here::here("R/_common.R"))
-
-here::here()
 ```
 
 ```{r}
@@ -57,7 +56,7 @@ auth <- meta |>
 year <- meta |>
   filter(Variable == "yearAdded") |>
   pull(Value)
-name <- year <- meta |>
+name <- meta |>
   filter(Variable == "indicatorName") |>
   pull(Value)
 url <- meta |>
@@ -100,6 +99,11 @@ status(st)
 :::
 :::
 
+```{=html}
+<details>
+<summary>Show metadata</summary>
+```
+
 ```{r tbl-meta}
 #| tbl-cap: 'Indicator metadata'
 #| echo: false
@@ -111,7 +115,11 @@ meta |>
 
 ```
 
-# Gjengroing
+```{=html}
+</details>
+```
+
+# Gjengroing / Woody Enchroachment
 
 <br />
 
