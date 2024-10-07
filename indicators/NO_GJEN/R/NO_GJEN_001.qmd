@@ -156,15 +156,7 @@ We rely on the following datasets:
 -   [Bioclimatic zones](https://artsdatabanken.no/Pages/181901/Bioklimatiske_soner). We use this dataset (together with the regions) to stratify reference and forest heights by bioclimatic (also referred to as vegetation/climatic) zones.
 -   The [SSB 10km and 50km grids](https://kartkatalog.geonorge.no/metadata/statistiske-rutenett/558c4995-9c55-4686-8143-f329f87ce33f) is used for visualization purposes.
 
-For each of the three main ecosystem types, we have defined a population sample
-consisting of spatially delineated areas that are either area representative within a given context (GRUK),
-or which have complete coverage over Norway.
-For Naturally open areas the population sample are GRUK polygons. 
-These localities are a representative sample of sparesly vegetated calcareous areas close to the coast around the Oslo fjord area.
-The scope of this indicator does in other words is only a very narrow subsectiono f the definition of the main ecosystem type, and there is data only from two out of five regions in Norway.
-For semi-natural meadows we define the population sample as polygons from the ASO monitoring program.
-These are 500-700 meadows across Norway, samples systematically to achieve a balanced sample. 
-For wetlands, we use types in nasjonalt grunnkart defined as _Klasse 7 Våtmark_.
+For each of the three main ecosystem types, we have defined a population sample consisting of spatially delineated areas that are either area representative within a given context (GRUK), or which have complete coverage over Norway. For Naturally open areas the population sample are GRUK polygons. These localities are a representative sample of sparesly vegetated calcareous areas close to the coast around the Oslo fjord area. The scope of this indicator does in other words is only a very narrow subsectiono f the definition of the main ecosystem type, and there is data only from two out of five regions in Norway. For semi-natural meadows we define the population sample as polygons from the ASO monitoring program. These are 500-700 meadows across Norway, samples systematically to achieve a balanced sample. For wetlands, we use types in nasjonalt grunnkart defined as *Klasse 7 Våtmark*.
 
 ### 2.1 Spatial and temporal resolution
 
@@ -224,22 +216,15 @@ The methodology used to calculate the *gjengroing* indicator is outlined in @fig
 knitr::include_graphics("../img/gjengroing_schematic.jpg")
 ```
 
-[NiN polygons](https://kartkatalog.miljodirektoratet.no/Dataset/Details/2031) of "Våtmark", "Naturlig åpne områder under skoggrensa" and "Semi-naturlig mark" with good ecological condition (we use the aggregated "Tilstand" variable assigned to each NiN polygon) are used as spatial references to define the optimal reference level (X~100~). The 50th percentile <!--#  is this correct? --> of LiDAR-derived vegetation heights within these polygons is used as X~100~. 
-We cannot define local reference values based on proximity, because the NiN polygons are spatially biased and not close to all population polygons. 
-Therefore we calculate regional reference values using regions and bioclimatic zones as stratification layers. 
-These strata exuates to homogeneous ecosystem areas sensu @vallecillo_eu-wide_2022. 
-We calculate the mean reference value for each unique combination of region-bioclimatic zone. 
-When calculating the indicator for each population polygon, the X~100~ reference level is inherited from the region-bioclimatic zone it falls within.
+[NiN polygons](https://kartkatalog.miljodirektoratet.no/Dataset/Details/2031) of "Våtmark", "Naturlig åpne områder under skoggrensa" and "Semi-naturlig mark" with good ecological condition (we use the aggregated "Tilstand" variable assigned to each NiN polygon) are used as spatial references to define the optimal reference level (X~100~).
 
-Once we have the reference vegetation height for a given ecosystem type and region-bioclimatic zone, we need to define the minimum (or worst/bad) condition (X~0~). 
-We use the 90th percentile of LiDAR-derived vegetation heights within "nasjonalt grunnkart skog" polygons 
-to define a climax vegetation successional stage where gjengroing is at its most extreme, 
-representing a completely deteriorated state for naturally open areas. 
-In order not to include forest patches that have recently been harvested, 
-we mask out any forest which has been clear-cut since 1986 [@senf2021mapping]. 
-Here, 1986 is a hard limit defined by the clear-cut dataset which was based on Landsat imagery. 
-Therefore we can be assured that we are measuring forest that is at least 35 years old. 
-For the naturally open areas, however, we set a manual, expert derived threshold (0.8 m) for the X~0~ value (explained below).
+::: callout-warning
+This part is subject to change. One reviewer suggested using the field-recorded variable *rask suksesjon* instead. This variable is essentially the same as woody enchroachemnt.
+:::
+
+The 50th percentile of LiDAR-derived vegetation heights within these polygons is used as X~100~. We cannot define local reference values based on proximity, because the NiN polygons are spatially biased and not close to all population polygons. Therefore we calculate regional reference values using regions and bioclimatic zones as stratification layers. These strata exuates to homogeneous ecosystem areas sensu @vallecillo_eu-wide_2022. We calculate the mean reference value for each unique combination of region-bioclimatic zone. When calculating the indicator for each population polygon, the X~100~ reference level is inherited from the region-bioclimatic zone it falls within.
+
+Once we have the reference vegetation height for a given ecosystem type and region-bioclimatic zone, we need to define the minimum (or worst/bad) condition (X~0~). We use the 90th percentile of LiDAR-derived vegetation heights within "nasjonalt grunnkart skog" polygons to define a climax vegetation successional stage where gjengroing is at its most extreme, representing a completely deteriorated state for naturally open areas. In order not to include forest patches that have recently been harvested, we mask out any forest which has been clear-cut since 1986 [@senf2021mapping]. Here, 1986 is a hard limit defined by the clear-cut dataset which was based on Landsat imagery. Therefore we can be assured that we are measuring forest that is at least 35 years old. For the naturally open areas, however, we set a manual, expert derived threshold (0.8 m) for the X~0~ value (explained below).
 
 The vegetation height percentiles are then scaled to between 0 and 1 using a sigmoid transformation @oliver2021new. See also @sec-scaling.
 
@@ -249,11 +234,9 @@ There are currently no other reference levels than X~0~ and X~100~ defined.
 
 #### 4.2.3. Spatial resolution and validity
 
-The reference levels are unique to homogeneous ecosystem areas defined as cross sections of region (five regions in Norway) and biomclimatic zone. Note that som biomclimatic zones may have been merged. 
+The reference levels are unique to homogeneous ecosystem areas defined as cross sections of region (five regions in Norway) and biomclimatic zone. Note that som biomclimatic zones may have been merged.
 
-Indicators are normalised at the polygon level with reference levels that are defined for much bigger regions.
-This means that indicator values are not precise at the polygon level, and probably should not be presented at that scale. 
-Indicator values aggregated to larger grid cells, such as a 50km grid, is ok (@sec-grid).
+Indicators are normalised at the polygon level with reference levels that are defined for much bigger regions. This means that indicator values are not precise at the polygon level, and probably should not be presented at that scale. Indicator values aggregated to larger grid cells, such as a 50km grid, is ok (@sec-grid).
 
 ## 5. Uncertainties
 
@@ -267,9 +250,11 @@ The calculation of the indicator involves many small decisions which can have si
 
     -   **This will only make sense for semi-naturlig and naturlig åpen as gjengroing is one of the "tilstand"-indicators.**
 
--   **Quantification of uncertainty around indicator scores.** Here we used the standard deviation in the vegetation heights for reference (NiN) polygons within each region to quantify the uncertainty around scaled indicator scores. We did this because the method used in `eaTools::ea_spread()` function is a bootstrapping approach which resulted in extremely small uncertainty estimates due to the large number of polygons included in our analysis. [In the future, a better method for quantifying uncertainty is needed.](https://github.com/NINAnor/eaTools/issues/17) Perhaps by running sensitivity analyses that test several variations of the points mentioned above can form the basis for quantifying an error margin around indicator values.
+::: callout-warning
+The point below is subject to change. One review suggested quantifying uncertainty using the estimated polygon level indicator values instead.
+:::
 
-    -   **NEEDS TO BE DISCUSSED IF THIS IS STILL AN ISSUE**
+-   **Quantification of uncertainty around indicator scores.** Here we used the standard deviation in the vegetation heights for reference (NiN) polygons within each region to quantify the uncertainty around scaled indicator scores. We did this because the method used in `eaTools::ea_spread()` function is a bootstrapping approach which resulted in extremely small uncertainty estimates due to the large number of polygons included in our analysis. [In the future, a better method for quantifying uncertainty is needed.](https://github.com/NINAnor/eaTools/issues/17) Perhaps by running sensitivity analyses that test several variations of the points mentioned above can form the basis for quantifying an error margin around indicator values.
 
 ## 6. References
 
@@ -490,12 +475,12 @@ nin |>
 ```
 
 ```{r tbl-printTable}
-#| tbl-cap : "List of included nature types in the dataset for reference areas."
+#| tbl-cap: "List of included nature types in the dataset for reference areas."
 #| message: false
+
 read_csv("/data/P-Prosjekter2/412421_okologisk_tilstand_2024/Data/NiN/includedNatureTypes.csv") |>
   kbl()
 ```
-
 
 ### 7.6 Import data to Google Earth Engine, run GEE JavaScript code and download data
 
@@ -673,9 +658,7 @@ coverageFig <- grid.arrange(c1, c2, c3, ncol=3, widths=c(1,1,1), padding = unit(
 
 #### 7.7.2 Forest heights
 
-Import forest heights per region-bioclimatic zone strata.
-@fig-coverage-map-forestheight shows that generally forest height increases when going from cold to warmer bioclimatic zones.
-The bar heights in @fig-coverage-map-forestheight are the X~0~ levels.
+Import forest heights per region-bioclimatic zone strata. @fig-coverage-map-forestheight shows that generally forest height increases when going from cold to warmer bioclimatic zones. The bar heights in @fig-coverage-map-forestheight are the X~0~ levels.
 
 ```{r importForestHeights}
 #| message: false
@@ -694,6 +677,7 @@ skog_region_bioclim$vegClimZoneLab <- factor(skog_region_bioclim$vegClimZoneLab,
 ```
 
 ```{r fig-coverage-map-forestheight, fig.height=5, fig.width=10, fig.cap="Map of Norway showing 90th percentile forest heights per region-bioclimatic zone strata."}
+#| message: false
 bioClimReg %>%
   left_join(skog_region_bioclim) %>% 
   ggplot(aes(x = vegClimZoneLab, y = skog))+
@@ -899,7 +883,7 @@ for(i in 1:length(ecosysttypes)){
 
 #### 7.7.5 Combine datasets for heights
 
-Combine the reference (good condition) and forest heights (poor condition) datasets with the population heights dataset per ecosystem type per strata. The forest heights will define the lower limit of the ecological condition score (ie. poor condition) for *vaatmark* and semi-natural land. However, for *naturlig åpen*, which is here represented as GRUK, we will manually set a threshold of 0.8 m as the poor condition. This is because encroachment in these areas may not culminate in a forested climax state, as for the others. 0.8 is used as an approximate height where we believe the nature types in this groups can be considered absolutely deteriorated. 
+Combine the reference (good condition) and forest heights (poor condition) datasets with the population heights dataset per ecosystem type per strata. The forest heights will define the lower limit of the ecological condition score (ie. poor condition) for *vaatmark* and semi-natural land. However, for *naturlig åpen*, which is here represented as GRUK, we will manually set a threshold of 0.8 m as the poor condition. This is because encroachment in these areas may not culminate in a forested climax state, as for the others. 0.8 is used as an approximate height where we believe the nature types in this groups can be considered absolutely deteriorated.
 
 ```{r combineData}
 #| message: false
@@ -957,8 +941,7 @@ for(i in 1:length(ecosysttypes)){
 
 ## 8. Spatial units
 
-The indicator values are estimated at the level of population polygons, but the reference levels are estimated for much larger homogeneous ecosystem areas (HEAs). 
-Therefore the indicator should only be interpreted at the level of the HEAs, or at least some rather large geographically aggregated scale, such as 10km grids.
+The indicator values are estimated at the level of population polygons, but the reference levels are estimated for much larger homogeneous ecosystem areas (HEAs). Therefore the indicator should only be interpreted at the level of the [HEAs](#sec-HEA), or at least some rather large geographically aggregated scale, such as 10km grids.
 
 ## 9. Analyses
 
@@ -982,9 +965,7 @@ scaleSigmoid <- function(variable){
 
 ### 9.1 Scaled indicator values at polygon level {#sec-scaling}
 
-We will calculate polygon-level indicator scores using the Sigmoid scaling functions.
-@fig-normalisedPlot show how the LiDAR vegetation heights (median for unique polygins) are normalised to the indicator scale.
-@fig-normalisationPlotNaturallyOpen shows that, for the naturally open areas at least, the X~0~ levels has the biggest impact in the indicator value (compared to X~0~).
+We will calculate polygon-level indicator scores using the Sigmoid scaling functions. @fig-normalisedPlot show how the LiDAR vegetation heights (median for unique polygins) are normalised to the indicator scale. @fig-normalisationPlotNaturallyOpen shows that, for the naturally open areas at least, the X~0~ levels has the biggest impact in the indicator value (compared to X~0~).
 
 ```{r normalise}
 #| message: false
@@ -1060,6 +1041,8 @@ aapneIndexPolySpat |>
 #| fig-cap: |
 #|   "Same figure as above, but looking only at naturally open areas with LiDAR height between zero and the upper reference value (0.8).
 #|   This show that there is some, but very little, variation due to differences in the upper reference value (i.e. the X100)."
+#| message: false
+#| warning: false
 aapneIndexPolySpat |>
   as_tibble() |>
   ggplot(aes(x = pop, y = index, 
@@ -1073,10 +1056,11 @@ aapneIndexPolySpat |>
 
 ```
 
-
 Here we will visualize the spatial variation in scaled gjengroings indicator values, as well as the vegetation heights for reference (good condition), indicator, and mature forest (poor condition) over the country. We could plot all the polygons, but it is computationally intensive and very difficult to visualize spatial variations over the entire country. Therefore we will calculate the area-weighted mean in values for each bioclimatic-region strata over the country.
 
-```{r}
+```{r awm-strata}
+#| message: false
+#| warning: false
   
 ecosysttypes <- c("vaatmark", "aapne", "semi")
 
@@ -1096,7 +1080,7 @@ for(i in 1:length(ecosysttypes)){
         dplyr::select(-geometry)
       
        # Write out for import later
-      ecosysttypeIndexStrata %>% write_csv(paste0('../data/',ecosysttype,'IndexStrata.csv'))
+      ecosysttypeIndexStrata %>% write_csv(paste0('/data/P-Prosjekter2/412421_okologisk_tilstand_2024/Data/Enchroachment_tempfiles/',ecosysttype,'IndexStrata.csv'))
       
       assign(paste0(ecosysttype, "IndexStrata"),ecosysttypeIndexStrata)
       
@@ -1110,7 +1094,9 @@ Using the polygon-level indicator scores, we will aggregate to 50km grid level t
 
 Here we will use a weighted average, but test out the eaTools::ea_spread function! It takes some time to run so best to do this overnight, or to parallelize in some way.
 
-```{r}
+```{r awm50km}
+#| message: false
+#| warning: false
 
 ecosysttypes <- c("vaatmark", "aapne", "semi")
 
@@ -1131,7 +1117,9 @@ for(i in 1:length(ecosysttypes)){
     dplyr::select(ssbid, index, sd)
   
     # Export
-    ecosysttypeIndexGrid %>% st_write(paste0('../data/',ecosysttype,'_index_grid.shp'), append=F)
+    #ecosysttypeIndexGrid %>% st_write(paste0('../data/',ecosysttype,'_index_grid.shp'), append=F)
+    ecosysttypeIndexGrid %>% st_write(paste0('/data/P-Prosjekter2/412421_okologisk_tilstand_2024/Data/Enchroachment_tempfiles/',ecosysttype,'_index_grid.shp'), append=F, quiet = T)
+
     
     assign(paste0(ecosysttype, "IndexGrid"),ecosysttypeIndexGrid)
      
@@ -1140,10 +1128,14 @@ for(i in 1:length(ecosysttypes)){
 
 ### 9.4 Scaled indicator values at regional level
 
+::: callout-warning
+This part is subject to change. One reviewer suggested using the SD from the indicator estimates across population polygons instead, to be consistent with the ecosystem condition framework.
+:::
+
 Now we will aggregate up to the regional level for final reporting. We will use the same method as in the section above, except here we will use a different method to calculate the uncertainty value around the indicator values. The ea_spread function in eaTools uses a bootstrapping method to calculate the standard error in indicator values when aggregating from the polygon to regional level. Because we have hundreds of thousands of polygons per region, the resulting standard errors are extremely small. Therefore we will use the standard deviation in reference values per region. The standard deviation, as a percentage of the average reference value is used to calculate the uncertainty in the scaled indicator value.
 
-```{r}
-
+```{r awm-reg}
+#| message: false
 ecosysttypes <- c("vaatmark", "aapne","semi")
   
 for(i in 1:length(ecosysttypes)) {
@@ -1178,7 +1170,7 @@ for(i in 1:length(ecosysttypes)) {
       dplyr::select(region, index, sd) %>%
       left_join(ecosysttypeHeightsRegion)
     
-      ecosysttypeIndexRegion %>% st_write(paste0('../data/',ecosysttype,'_index_region.shp'), append=F)
+      ecosysttypeIndexRegion %>% st_write(paste0('/data/P-Prosjekter2/412421_okologisk_tilstand_2024/Data/Enchroachment_tempfiles/',ecosysttype,'_index_region.shp'), append=F, quiet = T)
   
       assign(paste0(ecosysttype, "IndexRegion"),ecosysttypeIndexRegion)
   
@@ -1190,13 +1182,20 @@ for(i in 1:length(ecosysttypes)) {
 
 ### 9.5 Validation of index score
 
+::: callout-warning
+This part is subject to change- One reviewer suggested validating the indicator by calculating indicator values for all NiN polygins in the reference area dataset, regardless of the recorded *tilstand*, and the plotting the indicator against the variable *rask suksesjon* (essentially a measure of encroachment done in the field). This will show if the indicator is able to separate areas based on some measure of ground truth.
+:::
+
 In the NiN data, the overall score for "tilstand" consists of several sub-scores. In semi-natural ecosystems, a variation of gjengroing is recorded as a sub-score (Rask suksesjon). However, for wetlands and natural open areas, there are no sub-scores for gjengroing.
 
-To see how comparable the field-based condition scores from the NiN data are with the LiDAR-based height condition index score, we will repeat the gjengroing index calculation using reference heights from where the sub-category "" has a good condition.
+To see how comparable the field-based condition scores from the NiN data are with the LiDAR-based height condition index score, we will repeat the gjengroing index calculation using reference heights from where the sub-category "Rask suksesjon" has a good condition.
 
-```{r}
+```{r validation}
+#| message: false
+#| warning: false
 
- nin <- st_read('/data/R/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Naturtyper - Miljødirektoratets instruks/Naturtyper_nin_0000_norge_25833_FILEGDB.gdb', layer="naturtyper_nin_omr") %>%
+nin <- st_read('/data/R/GeoSpatialData/Habitats_biotopes/Norway_Miljodirektoratet_Naturtyper_nin/Original/Naturtyper - Miljødirektoratets instruks/Naturtyper_nin_0000_norge_25833_FILEGDB.gdb', layer="naturtyper_nin_omr",
+               quiet = T) %>%
     # Fix any invalid geometries
     mutate(validGeo = st_is_valid(SHAPE)) %>%
     filter(validGeo) %>%
@@ -1309,9 +1308,15 @@ semisIndexStrata <- semisIndexStrata %>%
 
 ## 10. Results
 
-### 10.1 Scaled indicator values at polygon level
+The enchroachment indicator is visualised at three different spatial scales below, per bioclimatic sone (@fig-multiple-maps-enc), per 50km grid cell (@fig-grid-level-enc) and per region (@fig-regional-level-enc). @fig-multiple-maps-enc show what can be considered the most correct visualisation of the indicator values across Norway. Wetlands and GRUK areas are generally in good condition, according to @fig-grid-level-enc. However, @fig-grid-level-enc show that the GRUK areas are on a worse condition, so perhaps the colors in @fig-multiple-maps-enc are misleading in some way? Semi-natural areas are more varied, with lower condition found in the central boreal zone in south and western Norway and south boreal zone in Central Norway (@fig-multiple-maps-enc).
 
-```{r multiple-maps-enc, fig.width=9,fig.height=8, fig.cap="Maps of scaled and unscaled indicator values, as well as reference values. For the unscaled variables the legend is truncated at 5 m to ensure the same colour gradient for all maps."}
+The gjengroing condition indicator scores are on average above 0.8 and therefore indicate a good overall condition in Norway (@fig-regional-level-enc-forest). Østlandet comes out best for våtmark and semi-naturlig åpne ecosystems. Nord-Norge has poorest condition for semi-naturlig åpne ecosystems, while vestlandet has the poorest scores for våtmark."
+
+### 10.1 Scaled indicator values at the level of homogeneous ecosystem areas {#sec-HEA}
+
+```{r fig-multiple-maps-enc, fig.width=9, fig.height=8}
+#| fig-cap: "Maps of variable and indicator values, as well as reference values, for unique homogeneous ecosystem areas. For the unscaled variables the legend is truncated at 5 m to ensure the same colour gradient for all maps."
+#| message: false
   
 # Import datasets
 ecosysttypes <- c("vaatmark", "aapne", "semi")
@@ -1319,7 +1324,8 @@ ecosysttypes <- c("vaatmark", "aapne", "semi")
 for(i in 1:length(ecosysttypes)){
     ecosysttype <- ecosysttypes[i]
 
-    ecosysttypeIndexStrata <- read_csv(paste0('../data/',ecosysttype,'IndexStrata.csv'))
+    ecosysttypeIndexStrata <- read_csv(paste0('/data/P-Prosjekter2/412421_okologisk_tilstand_2024/Data/Enchroachment_tempfiles/',
+                                              ecosysttype,'IndexStrata.csv'))
     
     assign(paste0(ecosysttype, "IndexStrata"),ecosysttypeIndexStrata)    
 }
@@ -1370,15 +1376,15 @@ makeStrataIndicatorMap <- function(data, title){
 
 v1 <- makeStrataIndicatorMap(vaatmarkIndexStrata, 'A) Våtmark scaled indicator')
 v2 <- makeStrataHeightMap(vaatmarkIndexStrata, "ref", 'B) Våtmark reference height', c(0,5))
-v3 <- makeStrataHeightMap(vaatmarkIndexStrata, "pop", 'C) Våtmark indicator height', c(0,5))
+v3 <- makeStrataHeightMap(vaatmarkIndexStrata, "pop", 'C) Våtmark vegetation height', c(0,5))
 
 a1 <- makeStrataIndicatorMap(aapneIndexStrata,  'E) Naturlig åpne scaled indicator')
 a2 <- makeStrataHeightMap(aapneIndexStrata, "ref", 'F) Naturlig åpne reference height', c(0,5))
-a3 <- makeStrataHeightMap(aapneIndexStrata, "pop", 'G) Naturlig åpne indicator height', c(0,5))
+a3 <- makeStrataHeightMap(aapneIndexStrata, "pop", 'G) Naturlig åpne vegetation height', c(0,5))
 
 s1 <- makeStrataIndicatorMap(semiIndexStrata,  'I) Semi-naturlig scaled indicator')
 s2 <- makeStrataHeightMap(semiIndexStrata, "ref", 'J) Semi-naturlig reference height', c(0,5))
-s3 <- makeStrataHeightMap(semiIndexStrata, "pop", 'K) Semi-naturlig indicator height', c(0,5))
+s3 <- makeStrataHeightMap(semiIndexStrata, "pop", 'K) Semi-naturlig vegetation height', c(0,5))
 
 
 strataHeightPlot <- grid.arrange(v1,v2,v3,
@@ -1390,7 +1396,8 @@ strataHeightPlot <- grid.arrange(v1,v2,v3,
 
 ### 10.2 Scaled indicator values at 50km grid level
 
-```{r grid-level-enc, fig.cap="Maps displaying scaled encroachment indicator values on a 50 km grid level"}
+```{r fig-grid-level-enc, fig.cap="Maps displaying scaled encroachment indicator values on a 50 km grid level"}
+#| message: false
 
 ecosysttypes <- c("vaatmark", "aapne", "semi")
 
@@ -1398,7 +1405,8 @@ for(i in 1:length(ecosysttypes)){
     
     ecosysttype <- ecosysttypes[i]
   
-    ecosysttypeIndexGrid <- st_read(paste0('../data/',ecosysttype,'_index_grid.shp')) 
+    ecosysttypeIndexGrid <- st_read(paste0('/data/P-Prosjekter2/412421_okologisk_tilstand_2024/Data/Enchroachment_tempfiles/',ecosysttype,'_index_grid.shp'),
+                                    quiet = T) 
   
     assign(paste0(ecosysttype, "IndexGrid"),ecosysttypeIndexGrid)
      
@@ -1449,15 +1457,16 @@ indexGridFig <- grid.arrange(vGrid1, vGrid2, vGrid3, ncol=3, widths=c(1,1,1),
 
 ### 10.3 Scaled indicator values at regional level
 
-```{r regional-level-enc, fig.cap="Maps displaying scaled encroachment indicator values on a regional level"}
-
+```{r fig-regional-level-enc-forest, fig.cap="Forest plot displaying scaled encroachment indicator values on a regional level"}
+#| message: false
+#| warning: false
 ecosysttypes <- c("vaatmark", "aapne","semi")
   
 for(i in 1:length(ecosysttypes)) {
     
       ecosysttype <- ecosysttypes[i]
   
-      ecosysttypeIndexRegion <- st_read(paste0('../data/',ecosysttype,'_index_region.shp'))
+      ecosysttypeIndexRegion <- st_read(paste0('/data/P-Prosjekter2/412421_okologisk_tilstand_2024/Data/Enchroachment_tempfiles/',ecosysttype,'_index_region.shp'), quiet = T)
   
       assign(paste0(ecosysttype, "IndexRegion"),ecosysttypeIndexRegion)
 }
@@ -1512,8 +1521,12 @@ i1 <- getIndicatorPlot('Våtmark')
 i2 <- getIndicatorPlot('Naturlig åpne')
 i3 <- getIndicatorPlot('Semi-naturlig')
 
-indicatorGraphFig <- grid.arrange(i1, i2, i3, ncol=3, widths=c(1,1,1), padding = unit(0, "line"), newpage = T) 
+grid.arrange(i1, i2, i3, ncol=3, widths=c(1,1,1), padding = unit(0, "line"), newpage = T) 
+```
 
+```{r fig-regional-level-enc, fig.cap="Maps displaying scaled encroachment indicator values on a regional level"}
+#| message: false
+#| warning: false
 # Make maps of regional index values
 getIndicatorMap <- function(data, label){
   regions %>%
@@ -1531,14 +1544,12 @@ m1 <- getIndicatorMap(vaatmarkTable, 'A) Våtmark')
 m2 <- getIndicatorMap(aapneTable, 'B) Naturlig åpne')
 m3 <- getIndicatorMap(semiTable, 'C) Semi-naturlig')
 
-indicatorGMapFig <- grid.arrange(m1, m2, m3, ncol=3, widths=c(1,1,1), padding = unit(0, "line"), newpage = T) 
+grid.arrange(m1, m2, m3, ncol=3, widths=c(1,1,1), padding = unit(0, "line"), newpage = T) 
 ```
-
-"From these tables, figures and maps we can see that the gjengroing condition indicator scores are on average above 0.8 and therefore indicate a good overall condition in Norway. Østlandet comes out best for våtmark and semi-naturlig åpne ecosystems. Nord-Norge has poorest condition for semi-naturlig åpne ecosystems, while vestlandet has the poorest scores for våtmark."
 
 ### 10.4 Validation of index score
 
-```{r validation-enc, fig.cap="Scatter plot displaying reference heights for good condition according to NiN field-mapping ecological condition overall score and sub-score for Rask suksesjon in semi-natural ecosystems"}
+```{r fig-validation-enc, fig.cap="Scatter plot displaying reference heights for good condition according to NiN field-mapping ecological condition overall score and sub-score for Rask suksesjon in semi-natural ecosystems"}
 
 refsemis %>%
   ggplot(aes(x = ref, y = refsub, color = vegClimZoneLab, shape = region)) +
@@ -1571,6 +1582,12 @@ semisIndexStrata %>%
 ```
 
 ## 12. Export file
+
+::: callout-warning
+This part is subject to change.
+:::
+
+<!--# For the sake of the current project I think we can just export the regional estimates. We can also export the HEA level indicator map, but the polyggon level (occurence level) data I think is best left as a temporary calulcation file -->
 
 We will export gjengroing indicator values at three levels: - polygon level - 50km grid level - regional level
 
